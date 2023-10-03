@@ -1,0 +1,51 @@
+{% load static %}
+<! html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Translator</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+
+    <style>
+        /* Your internal CSS styles go here */
+        body {
+            font-family: cyan, sans-serif;
+            background-color: cyan;
+        }
+
+        h1 {
+            color: red;
+        }
+        strong{
+        color: Blue;
+        }
+        h2{
+        color:red;
+        }
+
+        /* Add more styles as needed */
+    </style>
+</head>
+<body>
+    <h1>English to Hindi Translator</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="text"><strong>ENTER TEXT</strong>:</label>
+        <textarea id="text" name="text" rows="1" cols="50" required>{{ request.POST.text }}</textarea><br>
+        <button type="submit"><strong>TRANSLATE</strong></button>
+    </form>
+
+    {% if translated_text %}
+    <h2>Translation:</h2>
+    <p>{{ translated_text }}</p>
+
+    <h2>Word Meanings:</h2>
+    <ul>
+        {% for meaning in word_meanings %}
+        <li>{{ meaning }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <!-- Your HTML content here -->
+</body>
+</html>
